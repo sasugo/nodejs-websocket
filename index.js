@@ -14,18 +14,7 @@ const toHMI = {
 
 wss.on("connection", (ws) => {
   console.log("A new client connected!");
-  ws.on("message", (data) => {
-    console.log(`Message from client: ${data}`);
-
-    const parsed = JSON.parse(data);
-    ws.send(
-      JSON.stringify(
-        toHMI,
-        // ...parsed.data,
-        // messageFromServer: `Hello tab id: ${parsed.data.from}`,
-      ),
-    );
-  });
+  ws.send(JSON.stringify(toHMI));
   ws.on("close", () => {
     console.log("Sad to see you go :(");
   });
