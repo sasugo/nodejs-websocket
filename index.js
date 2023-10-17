@@ -14,7 +14,12 @@ const toHMI = {
 
 wss.on("connection", (ws) => {
   console.log("A new client connected!");
-  ws.send(JSON.stringify(toHMI));
+  setInterval(() => {
+    toHMI.signal1 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+    toHMI.signal2 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+    toHMI.signal3 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+    ws.send(JSON.stringify(toHMI));
+  }, 1000);
   ws.on("close", () => {
     console.log("Sad to see you go :(");
   });
